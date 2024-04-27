@@ -1,0 +1,94 @@
+package com.test.controller;
+
+import com.github.pagehelper.PageInfo;
+import com.test.entity.Category;
+import com.test.entity.Goods;
+import com.test.service.CategoryService;
+import com.test.service.GoodsService;
+import jakarta.annotation.Resource;
+import org.apache.ibatis.annotations.Delete;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Controller
+@RequestMapping("/admin/goods")
+public class GoodsCtrl {
+    @Resource
+    GoodsService goodsService;
+
+    @Resource
+    CategoryService categoryService;
+
+    @RequestMapping(value = "/getGoodsList",method = {RequestMethod.GET,RequestMethod.POST})
+    public String getGoodsList(Model model,
+                               @RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                               @RequestParam(value = "pageSize", required = false, defaultValue = "3")Integer pageSize){
+       PageInfo<Goods> goodsListPage =  goodsService.queryAllByPage(pageNum,pageSize);
+       model.addAttribute("goodsListPage",goodsListPage);
+
+//        List<Goods> goodsList = goodsService.queryAllGoods();
+//        model.addAttribute("goodsList",goodsList);
+        return "goodsList";
+    }
+
+    @GetMapping("/delGoods/{id}")
+    public String delGoods(@PathVariable("id") int gdID, Model model){
+        boolean flag = goodsService.deleteById(gdID);
+        if (flag){
+            model.addAttribute("msg","删除成功！");
+        } else{
+            model.addAttribute("msg","该商品不允许删除！");
+        }
+        return "forward:/admin/goods/getGoodsList";
+    }
+
+    @ResponseBody
+    @DeleteMapping("/delGoods/{id}")
+    public boolean delGoods2(@PathVariable("id") int gdID){
+        boolean flag = goodsService.deleteById(gdID);
+        return flag;
+    }
+
+    @GetMapping("/gotoAddGoods")
+    public String gotoAdd(Model model){
+        List<Category> categoryList = categoryService.queryAllCategory();
+        model.addAttribute("categoryList",categoryList);
+        return "goodsAdd";
+    }
+
+    @PostMapping("/addGoods")
+    public String addGoods(Goods goods,Model model){
+        int num = goodsService.insert(goods);
+        if (num > 0){
+            model.addAttribute("msg","商品【" + goods.getId()+"---"+goods.getName()+"】添加成功！");
+        } else{
+            model.addAttribute("msg","添加失败！");
+        }
+        return "forward:/admin/goods/getGoodsList";
+    }
+
+    @GetMapping("/{id}")
+    public String getGoods(@PathVariable("id") int gID,Model model){
+        List<Category> categoryList = categoryService.queryAllCategory();
+        model.addAttribute("categoryList",categoryList);
+        // 根据ID获取商品
+        Goods goods = goodsService.queryById(gID);
+        model.addAttribute("goods",goods);
+
+        return "goodsEdit";
+    }
+
+    @PostMapping("/editGoods")
+    public String editGoods(Goods goods,Model model){
+        int num= goodsService.update(goods);
+        if(num>0){
+            model.addAttribute("msg","商品【"+goods.getName()+"】信息更新成功！");
+        }
+        return "goodsEdit";
+    }
+
+}

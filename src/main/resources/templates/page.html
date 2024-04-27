@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="myPage(pageInfo,path)">
+    <div class="">
+        当前第 <span th:text="${pageInfo.pageNum}"></span> 页，
+        共 <span th:text="${pageInfo.pages}"></span> 页，
+        <span th:text="${pageInfo.total}"></span> 条记录
+    </div>
+    <ul class="pagelist" style="list-style: none">
+        <li th:if="${pageInfo.hasPreviousPage}" }>
+            <a th:href="${path}+'?pageNum=1'">首页</a>&nbsp;
+        </li>
+        <li th:if="${pageInfo.hasPreviousPage}">
+            <a th:href="${path}+ '?pageNum='+${pageInfo.prePage}">上一页</a>&nbsp;
+        </li>
+        <li th:each="nav:${pageInfo.navigatepageNums}">
+            <a th:href="${path}+'?pageNum='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+            <a th:class="${'active'}" th:if="${nav == pageInfo.pageNum}" th:text="${nav}"></a>&nbsp;
+        </li>
+        <li th:if="${pageInfo.hasNextPage}">
+            <a th:href="${path}+'?pageNum='+${pageInfo.nextPage}">下一页</a>&nbsp;
+        </li>
+        <li th:if="${pageInfo.pageNum < pageInfo.pages}">
+            <a th:href="${path}+'?pageNum='+${pageInfo.pages}">尾页</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

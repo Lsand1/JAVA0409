@@ -1,0 +1,10 @@
+.pagelist li{
+    float: left;
+}
+.pagelist li a{
+    color: black;
+}
+.pagelist li  a[class="active"]{
+    color: red;
+    font-weight:  bold ;
+}

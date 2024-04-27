@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品添加</title>
+    <link th:href="@{/local/css/goodsAdd.css}" rel="stylesheet">
+</head>
+<body>
+
+<div id="top" th:include="head.html"></div>
+<div id="middle">
+    <div id="left" th:include="left.html::left"></div>
+    <div id="right">
+        <form id="addGoods" action="/admin/goods/addGoods" method="post">
+
+            <table id="addTable">
+                <tr><th>名称</th><td><input type="text" name="name"></td></tr>
+                <tr><th>编号</th><td><input type="text"  name="code"></td></tr>
+                <tr><th>类别</th>
+                    <td>
+                        <select name="categoryId">
+                            <option th:each="category:${categoryList}"
+                                    th:value="${category.getId()}"
+                                    th:text="${category.getName()}">
+                            </option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr><th>单价</th><td><input type="number"  name="price"></td></tr>
+                <tr><th>库存</th><td><input type="number"  name="quantity"></td></tr>
+
+                <tr><th>是否热销</th>
+                    <td>
+                        <input type="radio" name="hot" checked value="1">是
+                        <input type="radio" name="hot"  value="0">否
+                    </td>
+                </tr>
+                <tr>
+                    <th>商品图片</th>
+                    <td>
+                        <div class="upload">
+                            <span class="plus">+</span>
+                            <input type="file"  id="input" accept=".jpg, .jpeg, .png">
+                            <input id="gdimage" type="hidden" name="image"  >
+                        </div>
+                        <img type="image" id="img" src="#" alt="#" class="display_none">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="reset" value="重置">
+                        <input type="submit" value="提交">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<div id="bottom" th:include="bottom.html::bottom"></div>
+
+<script th:src="@{/js/axios.min.js}"></script>
+<script th:src="@{/local/js/imageAdd.js}"></script>
+
+</body>
+</html>

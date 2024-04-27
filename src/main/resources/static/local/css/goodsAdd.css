@@ -1,0 +1,52 @@
+/*#addGoods{*/
+/*    width: 60vw;*/
+/*}*/
+
+
+#addTable{
+    width: 600px;
+    padding: 10px 50px 10px 20px;
+}
+#addTable th{
+    width: 85px;
+}
+#addTable tr{
+    height: 33px;
+}
+#addTable td[colspan]{
+    margin-top: -100px;
+    text-align: center;
+}
+.upload{
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    width: 100px;
+    border: 1px solid #ddd;
+    position: relative;
+    vertical-align: center;
+
+}
+.plus{
+    font-size:28px;
+}
+.upload #input{
+    top:0;
+    left:0;
+    position: absolute;
+    width:100px;
+    height: 100px;
+    opacity: 0;
+}
+
+#img{
+    width: 150px;
+    height: 150px;
+    /*top:-100px;*/
+    /*left:110px;*/
+    /*position: relative;*/
+}
+.display_none{
+    display: none;
+}
+

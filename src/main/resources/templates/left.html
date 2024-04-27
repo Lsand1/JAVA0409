@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="left" th:fragment="left">
+    <ul>
+        <li>
+            <a th:href="@{/admin/users}">会员管理</a>
+        </li>
+        <li>
+            <a th:href="@{/admin/categoryList}">商品类别管理</a>
+        </li>
+        <li>
+            <a th:href="@{/admin/goods/getGoodsList}">商品管理</a>
+        </li>
+        <li>
+            <a th:href="@{/admin/goodsList}">订单管理</a>
+        </li>
+        <li>
+            <a th:href="@{/admin/goods}">管理员管理</a>
+        </li>
+        <li>
+            <a th:href="@{/admin/goods}">个人信息</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

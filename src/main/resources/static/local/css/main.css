@@ -1,0 +1,76 @@
+#msg{
+    color: red;
+    height:6vh;
+    vertical-align: bottom;
+}
+table{
+    border: darkcyan 1px solid;
+
+}
+table tr{
+    height: 45px;
+}
+.bg2{background-color:lightgrey}
+
+#logout,#uName{
+    float: right;
+}
+input[type="submit"]{
+    cursor: pointer;
+}
+
+input,select,textarea{
+    border: lightseagreen 1px solid;
+}
+#top{
+    text-align: right;
+    height: 60px;
+    background-color: darkcyan;
+}
+
+#bottom{
+    background-color: lightseagreen;
+    text-align: center;
+    height: 40px;
+}
+#middle{
+    /*width:calc(100vw - 20px) ;*/
+    height:calc(100vh - 100px);
+    clear: both;
+}
+
+#left{
+    width: 15vw;
+    font: bold 22px "宋体" ;
+    background-color: lightseagreen;
+    height:calc(100vh - 100px);
+    padding-top: 40px;
+}
+#left>ul>li{
+    list-style: none;
+    line-height: 60px;
+    padding-left: 10px;
+
+}
+#left>ul>li>a{
+    text-decoration: none;
+    color: white;
+
+}
+#left>ul>li>a:hover{
+    font: bold 25px "宋体" ;
+    color: red;
+}
+
+#left ,#right {
+    float: left;
+}
+#right{
+    padding: 10px 40px;
+    margin: 0 auto;
+}
+.display_none{
+    display: none;
+}
+
+
