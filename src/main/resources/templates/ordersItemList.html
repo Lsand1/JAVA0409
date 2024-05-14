@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/local/css/goodsList.css}" rel="stylesheet">
+</head>
+<body>
+<div id="top" th:replace="~{head.html}"></div>
+<div id="middle">
+    <div id="left" th:replace="~{left.html::left}"></div>
+    <div id="right">
+        <div id="msg" th:text="${msg}"></div>
+        <table>
+            <tr>
+                <th>订单详请ID</th>
+                <th>订单编号</th>
+                <th>商品</th>
+                <th>数量</th>
+            </tr>
+            <tr th:each="ordersItem:${ordersItemList}">
+                <td th:text="${ordersItem.getId()}"></td>
+                <td th:text="${ordersItem.getOrders.getCode()}"></td>
+                <td th:text="${ordersItem.getGoods.getName()}"></td>
+                <td th:text="${ordersItem.getNum()}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>
+<div id="bottom" th:replace="~{bottom.html::bottom}"></div>
+</body>
+</html>

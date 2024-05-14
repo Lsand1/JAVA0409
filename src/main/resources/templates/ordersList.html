@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/local/css/goodsList.css}" rel="stylesheet">
+    <link th:href="@{/local/css/page.css}" rel="stylesheet">
+</head>
+<body>
+<div id="top" th:replace="~{head.html}"></div>
+<div id="middle">
+    <div id="left" th:replace="~{left.html::left}"></div>
+    <div id="right">
+        <div id="msg" th:text="${msg}"></div>
+        <table>
+            <tr>
+                <th>订单ID</th>
+                <th>订单编号</th>
+                <th>用户登录名</th>
+                <th>订单状态</th>
+                <th>订单金额</th>
+                <th>下单时间</th>
+                <th>操作</th>
+            </tr>
+            <div th:each="orders:${ordersListPage.list}">
+                <tr>
+                    <td th:text="${orders.getId()}"></td>
+                    <td th:text="${orders.getCode()}"></td>
+                    <td th:text="${orders.getUsers.getLoginName()}"></td>
+                    <td>
+                        <span th:if="${orders.getStatus()} eq 1">未付款</span>
+                        <span th:if="${orders.getStatus()} eq 2">未发货</span>
+                        <span th:if="${orders.getStatus()} eq 3">已发货</span>
+                        <span th:if="${orders.getStatus()} eq 4">已签收</span>
+                        <span th:if="${orders.getStatus()} eq 5">交易失败</span>
+                    </td>
+                    <td th:text="${orders.getAmount()}"></td>
+                    <td th:text="${#dates.format(orders.getAddtime(),'yyyy-mm-dd hh:MM:ss')}"></td>
+                    <td>
+                        <a th:href="@{/admin/orders/delOrders/} + ${orders.getId()}">删除</a>
+                        <a th:href="@{/admin/ordersItem/getOrdersItemList/} + ${orders.getId()}">订单详请</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="1"></td>
+                    <td colspan="6">
+                        <div th:each="ordersItem:${orders.getOrdersItemList()}">
+                            <span>[[${ordersItem.getGoods.getName()}]]</span>
+                            <span>[[${ordersItem.getNum()}]]</span>
+                        </div>
+
+                    </td>
+                </tr>
+            </div>
+        </table>
+        <div th:replace="~{page.html::myPage(${ordersListPage},'/admin/orders/getOrdersList')}"></div>
+    </div>
+</div>
+</div>
+<div id="bottom" th:replace="~{bottom.html::bottom}"></div>
+</body>
+</html>

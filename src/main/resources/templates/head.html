@@ -8,22 +8,15 @@
 </head>
 <body>
 <div id="top" th:fragment="top">
+    <input id="btnFresh" type="button" value="刷新">
     <form action="/admin/logout">
         <input id="logout" type="submit" value="退出登录">
     </form>
-    <div id="uName"></div>
-    <input id="btnFresh" type="button" value="刷新">
+    <div id="uName" th:text="${session.aduName}"></div>
 </div>
 
 <script th:src="@{/js/jquery-3.6.4.js}"></script>
-<script>
-    $(function () {
-        let url = window.location.href;
-        $("#btnFresh").click(function () {
-            window.location.href = url;
-        })
-    })
-</script>
-
+<script th:src="@{/js/jquery-3.6.4.js}"></script>
+<script th:src="@{/local/js/commom.js}"></script>
 </body>
 </html>

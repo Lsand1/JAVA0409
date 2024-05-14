@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.OrdersItemDao">
+
+    <resultMap type="com.test.entity.OrdersItem" id="OrdersItemMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="orderId" column="order_id" jdbcType="INTEGER"/>
+        <result property="goodsId" column="goods_id" jdbcType="INTEGER"/>
+        <result property="num" column="num" jdbcType="INTEGER"/>
+        <association property="orders" column="order_id" select="com.test.dao.OrdersDao.queryById">
+        </association>
+        <association property="goods" column="goods_id" javaType="com.test.entity.Goods"
+                     select="com.test.dao.GoodsDao.queryById">
+        </association>
+    </resultMap>
+
+    <!--通过订单ID删除订单详请-->
+    <delete id="delOrdersItemByoId">
+        delete
+        from orders_item
+        where order_id = #{orderId}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="queryAll" resultMap="OrdersItemMap">
+        select id,
+               order_id,
+               goods_id,
+               num
+        from orders_item
+    </select>
+
+    <!--根据订单ID查询-->
+    <select id="queryByoId" resultMap="OrdersItemMap">
+        select id,
+               order_id,
+               goods_id,
+               num
+        from orders_item
+        where order_id = #{orderId}
+
+    </select>
+
+
+    <delete id="deleteByUserId">
+        DELETE
+        FROM orders_item
+        WHERE order_id IN (
+            SELECT orders.id
+            FROM orders
+                     INNER JOIN users
+                                ON orders.user_id = users.id
+            WHERE users.id = #{userId}
+        )
+    </delete>
+</mapper>
+
