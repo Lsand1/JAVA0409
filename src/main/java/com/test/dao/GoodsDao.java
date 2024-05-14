@@ -26,7 +26,8 @@ public interface GoodsDao {
     Goods queryById(Integer id);
 
 
-
+    @Delete("DELETE FROM goods WHERE category_id = #{id} ")
+    int deleteByTypeId(int id);
 
     @Delete("DELETE FROM goods WHERE id = #{gdID} ")
     int deleteById(int gdID);

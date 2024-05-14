@@ -2,6 +2,7 @@ package com.test.service;
 
 import com.github.pagehelper.PageInfo;
 import com.test.entity.Goods;
+import com.test.entity.Response;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface GoodsService {
 
     boolean deleteById(int gdID);
 
-    int insert(Goods goods);
+    String insert(Goods goods);
 
-    int update(Goods goods);
+    Response<Goods> update(Goods goods);
 }

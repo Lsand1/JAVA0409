@@ -4,10 +4,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.test.dao.GoodsDao;
 import com.test.entity.Goods;
+import com.test.entity.Response;
 import com.test.service.GoodsService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -40,13 +42,36 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public int insert(Goods goods) {
-        return goodsDao.insert(goods);
+    public String insert(Goods goods) {
+        String msg = "商品添加失败";
+        //
+        if (goods.getPrice() == null || goods.getPrice() <= 0) {
+            msg = "商品价格范围不正确";
+            return msg;
+        }
+        int num = goodsDao.insert(goods);
+        if (num > 0) {
+            msg = "商品【" + goods.getId() + "---" + goods.getName() + "】添加成功！";
+        }
+        return msg;
     }
 
     @Override
-    public int update(Goods goods) {
-        return goodsDao.update(goods);
+    public Response<Goods> update(Goods goods) {
+
+        Response<Goods> res = null;
+        if (null == goods.getPrice() || goods.getPrice() < 0) {
+            res = Response.fail("商品价格范围不正确");
+            return res;
+        }
+        int num = goodsDao.update(goods);
+        if (num > 0) {
+            res = Response.success("商品【" + goods.getId() + "---" + goods.getName() + "】编辑成功！");
+        } else {
+            res = Response.fail("商品编辑失败！");
+        }
+
+        return res;
     }
 
 
