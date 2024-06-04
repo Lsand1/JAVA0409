@@ -1,6 +1,8 @@
 package com.test.entity;
 
-public class Response<T> {
+import java.io.Serializable;
+
+public class Response<T> implements Serializable {
 
     private boolean success = true;
     private String message;

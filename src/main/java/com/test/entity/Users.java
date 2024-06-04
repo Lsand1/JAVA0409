@@ -1,5 +1,7 @@
 package com.test.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -9,15 +11,18 @@ import java.io.Serializable;
  * @author suxuexia
  * @since 2024-05-07 10:07:15
  */
+@Schema(description = "会员")
 public class Users implements Serializable {
     private static final long serialVersionUID = 939753003031575883L;
     /**
      * 用户ID
      */
+    @Schema(description = "用户ID")
     private Integer id;
     /**
      * 登录名
      */
+    @Schema(description = "登录名")
     private String loginName;
     /**
      * 姓名
