@@ -7,6 +7,9 @@ import com.test.entity.Goods;
 import com.test.entity.Response;
 import com.test.service.GoodsService;
 import jakarta.annotation.Resource;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -31,11 +34,16 @@ public class GoodsServiceImpl implements GoodsService {
         return pageInfo;
     }
 
+    @Cacheable(cacheNames = "goods",key = "#id")
     @Override
-    public Goods queryById(Integer id) {
-        return goodsDao.queryById(id);
+    public Response<Goods>  queryById(Integer id) {
+        Response<Goods> res = Response.success(goodsDao.queryById(id));
+        return res;
     }
 
+
+
+    @CacheEvict(cacheNames = "goods",key = "#gdID")
     @Override
     public boolean deleteById(int gdID) {
         return goodsDao.deleteById(gdID) > 0;
@@ -56,6 +64,7 @@ public class GoodsServiceImpl implements GoodsService {
         return msg;
     }
 
+    @CachePut(cacheNames = "goods",key = "#goods.id")
     @Override
     public Response<Goods> update(Goods goods) {
 
@@ -66,7 +75,7 @@ public class GoodsServiceImpl implements GoodsService {
         }
         int num = goodsDao.update(goods);
         if (num > 0) {
-            res = Response.success("商品【" + goods.getId() + "---" + goods.getName() + "】编辑成功！");
+            res = Response.success("商品【" + goods.getId() + "---" + goods.getName() + "】编辑成功！",goods);
         } else {
             res = Response.fail("商品编辑失败！");
         }

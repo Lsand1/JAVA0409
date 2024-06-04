@@ -11,7 +11,7 @@ public interface GoodsService {
 
     PageInfo<Goods> queryAllByPage(Integer pageNum, Integer pageSize);
 
-    Goods queryById(Integer id);
+    Response<Goods>  queryById(Integer id);
 
     boolean deleteById(int gdID);
 

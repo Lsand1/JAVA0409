@@ -75,7 +75,7 @@ public class GoodsCtrl {
         List<Category> categoryList = categoryService.queryAllCategory();
         model.addAttribute("categoryList", categoryList);
         // 根据ID获取商品
-        Goods goods = goodsService.queryById(gID);
+        Goods goods = goodsService.queryById(gID).getData();
         model.addAttribute("goods", goods);
 
         return "goodsEdit";

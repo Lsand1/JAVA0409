@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author suxuexia
  * @since 2024-03-26 10:20:48
  */
-public class Goods  {
+public class Goods implements Serializable  {
 
     /**
      * 商品ID
@@ -26,7 +26,7 @@ public class Goods  {
     /**
      * 商品名
      */
-    private String name;
+    public String name;
     /**
      * 商品价格
      */
