@@ -23,4 +23,8 @@ public class OrdersItemServiceImpl implements OrdersItemService {
         return this.ordersItemDao.queryByoId(ordersItem);
     }
 
+    @Override
+    public List<OrdersItem> queryByPage(OrdersItem ordersItem) {
+        return List.of();
+    }
 }

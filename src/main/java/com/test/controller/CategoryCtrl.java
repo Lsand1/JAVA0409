@@ -14,26 +14,25 @@ import org.springframework.web.bind.annotation.*;
 public class CategoryCtrl {
     @Resource
     CategoryService categoryService;
-
-    @RequestMapping(value = "categoryList",method = {RequestMethod.GET,RequestMethod.POST})
-    public String getCategoryListPage(@RequestParam(value = "pageNum",required = false,defaultValue = "1") Integer pageNum,
-                                   @RequestParam(value = "pageSize",required = false,defaultValue = "6") Integer pageSize,
-                                   Model model){
-        PageInfo<Category> categoryListPage = categoryService.queryAllByPage(pageNum,pageSize);
-        model.addAttribute("categoryListPage",categoryListPage);
-        return "categoryList";
+    @RequestMapping(value = "/getCategoryList",method = {RequestMethod.GET,RequestMethod.POST})
+    public String getCategoryList(Model model,
+                                  @RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                                  @RequestParam(value = "pageSize", required = false, defaultValue = "5")Integer pageSize){
+        PageInfo<Category> categoryPage=categoryService.queryAllByPage(pageNum,pageSize);
+        model.addAttribute("categoryPage",categoryPage);
+        return "category";
     }
 
     @ResponseBody
     @GetMapping("/delCategory/{id}")
     public int delCategory( @PathVariable("id") int id) {
-        int flag =  categoryService.deleteById(id);
-        return flag;
+    int flag =  categoryService.deleteById(id);
+    return flag;
     }
 
     @ResponseBody
     @RequestMapping(value = "/editCategory",method = RequestMethod.POST)
-    public int editCategory(@RequestBody Category category){
+        public int editCategory(@RequestBody Category category){
         System.out.println(category);
         int num= categoryService.update(category);
         return num;
@@ -42,8 +41,8 @@ public class CategoryCtrl {
     @ResponseBody
     @PostMapping( "/addCategory")
     public int addCategory(String name){
+        System.out.println(name+"----");
         int num= categoryService.insert(name);
         return num;
     }
-
 }

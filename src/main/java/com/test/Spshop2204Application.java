@@ -6,8 +6,8 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @EnableCaching
 @SpringBootApplication
-public class SpShop2204Application {
-    public static void main(String[] args) {
-        SpringApplication.run(SpShop2204Application.class);
+public class Spshop2204Application {
+    public static void main(String[] args){
+        SpringApplication.run(Spshop2204Application.class);
     }
 }

@@ -1,13 +1,14 @@
 package com.test.entity;
 
 import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * (Orders)实体类
  *
- * @author suxuexia
- * @since 2024-03-26 09:35:01
+ * @author makejava
+ * @since 2024-05-14 08:12:46
  */
 public class Orders {
     /**
@@ -34,10 +35,17 @@ public class Orders {
      * 下单时间
      */
     private Date addtime;
-
     private Users users;
 
     private List<OrdersItem> ordersItemList;
+
+    public List<OrdersItem> getOrdersItemList() {
+        return ordersItemList;
+    }
+
+    public void setOrdersItemList(List<OrdersItem> ordersItemList) {
+        this.ordersItemList = ordersItemList;
+    }
 
     public Users getUsers() {
         return users;
@@ -47,13 +55,7 @@ public class Orders {
         this.users = users;
     }
 
-    public List<OrdersItem> getOrdersItemList() {
-        return ordersItemList;
-    }
 
-    public void setOrdersItemList(List<OrdersItem> ordersItemList) {
-        this.ordersItemList = ordersItemList;
-    }
 
     public Integer getId() {
         return id;

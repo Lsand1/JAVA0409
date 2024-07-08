@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/local/css/categoryAdd.css}" rel="stylesheet">
+    <link th:href="@{/local/css/page.css}" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{head.html}">顶部</div>
+<div id="middle">
+    <div id="left" th:replace="~{left.html::left}"></div>
+    <div id="right">
+        <form action="#">
+            <input id="gdtypeName" type="text" name="name" maxlength="20">
+            <input id="addtype" type="button" value="添加商品类别">
+        </form>
+        <div id="msg" th:text="${msg}"></div>
+        <table>
+            <tr>
+                <th>类别ID</th>
+                <th>商品类别</th>
+                <th>操作</th>
+            </tr>
+            <tr th:each="category:${categoryPage.list}">
+                <td th:text="${category.getId()}"></td>
+                <td >
+                    <span th:text="${category.getName()}"></span>
+                    <input class="display_none" type="text" th:onchange="editCategory(this, [[${category.getId()}]]) ">
+                </td>
+                <td>
+                    <a href="#" th:onclick="goEditCategory(this)">编辑</a>
+                    <a href="#" th:onclick="delCategory(this, [[${category.getId()}]] )">删除</a>
+                </td>
+            </tr>
+
+        </table>
+        <div th:include="~{page.html::myPage(${categoryPage},getCategoryList)}"></div>
+    </div>
+</div>
+<div id="bottom" th:replace="~{bottom.html::bottom}"></div>
+</body>
+<script th:src="@{/js/jquery-3.6.4.js}"></script>
+<script th:src="@{/local/js/category.js}"></script>
+
+
+</html>

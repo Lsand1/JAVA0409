@@ -1,33 +1,30 @@
 package com.test.dao;
 
+
 import com.test.entity.Category;
 import com.test.entity.Goods;
 import org.apache.ibatis.annotations.*;
-
 import java.util.List;
 
 @Mapper
 public interface GoodsDao {
-
     @Results({
-            @Result(column = "category_id", property = "categoryId"),
-            @Result(column = "sale_quantity", property = "saleQuantity"),
-            @Result(column = "category_id", property = "category", javaType = Category.class,
-                    one = @One(select = "com.test.dao.CategoryDao.queryBytID"))
+            @Result(column = "category_id",property = "categoryId"),
+            @Result(column = "sale_quantity",property = "saleQuantity"),
+            @Result(column = "category_id",property = "category",javaType = Category.class,
+            one = @One(select = "com.test.dao.CategoryDao.queryBytID"))
     })
     @Select("select * from goods")
     List<Goods> queryAllGoods();
-
     @Results({
-            @Result( column = "category_id",property = "categoryId"),
-            @Result( column = "sale_quantity",property = "saleQuantity"),
+            @Result(column = "category_id",property = "categoryId"),
+            @Result(column = "sale_quantity",property = "saleQuantity"),
     })
-    @Select("select * from goods where id = #{id}")
-    Goods queryById(Integer id);
-
 
     @Delete("DELETE FROM goods WHERE category_id = #{id} ")
     int deleteByTypeId(int id);
+    @Select("select * from goods where id = #{id}")
+    Goods queryById(Integer id);
 
     @Delete("DELETE FROM goods WHERE id = #{gdID} ")
     int deleteById(int gdID);
@@ -58,5 +55,4 @@ public interface GoodsDao {
             ",image = #{goods.image}" +
             "  where id = #{goods.id}")
     int update(@Param("goods") Goods goods);
-
 }

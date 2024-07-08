@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品类别编辑</title>
+    <link th:href="@{/local/css/categoryAdd.css}" rel="stylesheet">
+</head>
+<body>
+<div>
+    <div id="top" th:include="head.html"></div>
+    <div id="middle">
+
+        <div id="left" th:include="left.html::left"></div>
+        <div id="right">
+            <div id="msg" th:text="${msg}"></div>
+            <form id="editmimaAdminuser" action="/admin/adminuser/editmimaAdminuser" method="post">
+                <input type="hidden" name="id" th:value="${session.adu.getId()}">
+                    <tr>输入密码：<input  id="psw" type="text"></tr>
+                    <tr>输入密码：<input  id="psws" name="password" type="text"></tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="提交">
+                            <input id="btnChPws" type="button" value="提交(button)">
+                        </td>
+                    </tr>
+            </form>
+        </div>
+    </div>
+    <div id="bottom" th:include="bottom.html::bottom"></div>
+    <script th:src="@{/js/axios.min.js}"></script>
+    <script th:src="@{/js/jquery-3.4.1.slim.min.js}"></script>
+    <script th:src="@{/local/js/adminuser.js}"></script>
+</div>
+</body>
+</html>

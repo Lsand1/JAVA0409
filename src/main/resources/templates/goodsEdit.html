@@ -7,10 +7,10 @@
 </head>
 <body>
 <div>
-    <div id="top" th:replace="~{head.html}"></div>
+    <div id="top" th:replace="head.html"></div>
     <div id="middle">
 
-        <div id="left" th:replace="~{left.html::left}"></div>
+        <div id="left" th:replace="left.html::left"></div>
         <div id="right">
             <div id="msg" th:text="${msg}"></div>
             <form id="editGoods" action="/admin/goods/editGoods" method="post">
@@ -62,7 +62,6 @@
     <div id="bottom" th:include="bottom.html::bottom"></div>
     <script th:src="@{/js/axios.min.js}"></script>
     <script th:src="@{/local/js/imageAdd.js}"></script>
-
 </div>
 
 </body>

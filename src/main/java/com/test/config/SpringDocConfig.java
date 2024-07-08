@@ -4,7 +4,6 @@ import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
-import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,21 +22,7 @@ public class SpringDocConfig {
                         .url("https://127.0.0.1/docs"))
                 ;
     }
-
-//    @Bean
-//    public GroupedOpenApi goodsApi() {
-//
-//        return GroupedOpenApi.builder()
-//                .group("goods")
-//                .pathsToMatch("/admin/**")
-//                .build();
-//    }
-//    @Bean
-//    public GroupedOpenApi userApi() {
-//        return GroupedOpenApi.builder()
-//                .group("user")
-//                .pathsToMatch("/users/**")
-//                .build();
-//    }
 }
+
+
 

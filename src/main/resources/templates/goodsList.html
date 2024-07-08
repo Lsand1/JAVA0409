@@ -4,74 +4,43 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/css/viewer.css}" rel="stylesheet">
-    <link th:href="@{/local/css/goodsList.css}" rel="stylesheet">
-    <link th:href="@{/css/layer.css}" rel="stylesheet">
-    <link th:href="@{/local/css/page.css}" rel="stylesheet">
+    <!-- 确保CSS和JS文件路径正确 -->
+    <link href="../static/css/viewer.css" rel="stylesheet">
+    <link href="../static/local/css/goodsList.css" rel="stylesheet">
+    <link href="../static/css/layer.css" rel="stylesheet">
+    <link href="../static/local/css/page.css" rel="stylesheet">
 </head>
 <body>
 <div th:replace="~{head.html}">顶部</div>
 <div id="middle">
-    <div id="left" th:replace="~{left.html::left}"></div>
-    <div id="right">
-        <form action="/admin/goods/gotoAddGoods" method="get">
-            <input type="submit" value="添加商品">
-        </form>
-        <div id="msg" th:text="${msg}"></div>
-        <table>
-            <tr>
-                <th>商品ID</th>
-                <th>商品编号</th>
-                <th>商品名称</th>
-                <th>商品类别</th>
-                <th>商品单价</th>
-                <th>库存</th>
-                <th>销售量</th>
-                <th>添加时间</th>
-                <th>热销</th>
-                <th>图片</th>
-                <th>操作</th>
-            </tr>
-            <tr th:each="goods:${goodsListPage.list}">
-                <td th:text="${goods.getId()}"></td>
-                <td th:text="${goods.getCode()}"></td>
-                <td class="width150">
-                    <span th:text="${#strings.abbreviate(goods.getName(),10)}"></span>
-                    <input type="hidden" th:value="${goods.getName()}">
-                </td>
-                <td th:text="${goods.getCategory().getName()}"></td>
-                <td th:text="${goods.getPrice()}"></td>
-                <td th:text="${goods.getQuantity()}"></td>
-                <td th:text="${goods.getSaleQuantity()}"></td>
-
-                <td th:text="${#dates.format(goods.getAddtime(),'yyyy-mm-dd hh:mm:ss')}"></td>
-
-                <td>
-                    <span th:if="${goods.getHot()} eq 1">是</span>
-                    <span th:unless="${goods.getHot()} eq 1">否</span>
-                </td>
-                <td>
-                    <img class="listimg" th:src="${goods.getImage()}">
-                </td>
-
-                <td>
-                    <a th:href="@{/admin/goods/delGoods/}+${goods.getId()}">删除</a>
-                    <a href="#" th:onclick="delGoods(this, [[${goods.getId()}]] )">删除(ajax)</a>
-
-                    <a th:href="@{/admin/goods/}+${goods.getId()}">编辑</a>
-
-                </td>
-            </tr>
-        </table>
-        <div th:replace="~{page.html::myPage(${goodsListPage},'/admin/goods/getGoodsList')}"></div>
-    </div>
+    <!-- ... 其他内容 ... -->
+    <form action="/admin/goods/gotoAddGoods" method="get"> <!-- 如果是获取数据，使用GET方法 -->
+        <input type="submit" value="添加商品">
+    </form>
+    <!-- ... 商品列表 ... -->
+    <tr th:each="goods : ${goodsListPage.list}">
+        <!-- ... 其他列 ... -->
+        <td>
+            <!-- 使用表单进行删除操作 -->
+            <form th:action="@{/admin/goods/delGoods/__}" method="post">
+                <input type="hidden" name="id" th:value="${goods.id}">
+                <input type="submit" value="删除">
+            </form>
+            <!-- AJAX删除操作需要JavaScript函数支持 -->
+            <a href="javascript:void(0);" th:onclick="'delGoods('+${goods.id}+')'">删除(ajax)</a>
+            <!-- ... 编辑链接 ... -->
+        </td>
+    </tr>
+    <!-- ... 分页组件 ... -->
+    <div th:replace="~{page.html::myPage(${goodsListPage},'/admin/goods/getGoodsList')}"></div>
+    <!-- ... 其他内容 ... -->
 </div>
-<div id="bottom" th:replace="~{bottom.html::bottom}"></div>
+<div id="bottom" th:replace="~{bottom.html}">底部</div>
 
-</body>
-
+<!-- 确保JavaScript文件路径正确 -->
 <script th:src="@{/js/viewer.js}"></script>
 <script th:src="@{/js/jquery-viewer.js}"></script>
 <script th:src="@{/local/js/goodsList.js}"></script>
 <script th:src="@{/js/layer.js}"></script>
+</body>
 </html>

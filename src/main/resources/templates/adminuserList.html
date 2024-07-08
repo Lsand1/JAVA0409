@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta charset="UTF-8">
+    <title>管理员用户列表</title>
+    <link th:href="@{/local/css/categoryAdd.css}" rel="stylesheet">
+    <link th:href="@{/local/css/page.css}" rel="stylesheet">
+    <!-- 其他头部资源 -->
+</head>
+<body>
+<div th:replace="~{head.html}">顶部导航</div>
+<div id="middle">
+    <div id="left" th:replace="~{left.html::left}">左侧导航</div>
+    <div id="right">
+        <!-- 表单添加action属性 -->
+        <form action="/指定实际的提交URL" method="post">
+            <label for="gdtypeName">类别名称：</label>
+            <input id="gdtypeName" type="text" name="name" maxlength="20" required>
+            <input type="submit" value="添加类别">
+        </form>
+        <div id="msg" th:text="${msg}"></div>
+        <!-- 表格和操作 -->
+        <table>
+            <!-- 表头 -->
+            <tr>
+                <th>类别ID</th>
+                <th>管理员姓名</th>
+                <th>操作</th>
+            </tr>
+            <!-- 动态生成的行 -->
+            <tr th:each="adminuser : ${adminuserPageInfo.list}">
+                <td th:text="${adminuser.id}"></td>
+                <td th:text="${adminuser.name}"></td>
+                <td>
+                    <!-- 确保onclick事件调用的函数存在并且正确 -->
+                    <a href="#" th:onclick="'editAdminuser('+${adminuser.id}+')'">重置密码</a>
+                </td>
+            </tr>
+        </table>
+        <!-- 分页组件 -->
+        <div th:include="~{page.html :: myPage(${adminuserPageInfo},'getAdminuserList')}"></div>
+    </div>
+</div>
+<div id="bottom" th:replace="~{bottom.html :: bottom}">底部信息</div>
+
+<!-- JavaScript文件 -->
+<script th:src="@{/js/jquery-3.6.4.js}"></script>
+<script th:src="@{/local/js/adminuser.js}"></script>
+</body>
+</html>

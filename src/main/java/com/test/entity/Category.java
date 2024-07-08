@@ -5,11 +5,10 @@ import java.io.Serializable;
 /**
  * (Category)实体类
  *
- * @author suxuexia
- * @since 2024-04-02 10:04:18
+ * @author makejava
+ * @since 2024-04-02 10:05:17
  */
-public class Category {
-
+public class Category  {
     /**
      * 类别ID
      */

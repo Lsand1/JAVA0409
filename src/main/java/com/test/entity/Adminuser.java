@@ -1,15 +1,15 @@
 package com.test.entity;
 
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  * (Adminuser)实体类
  *
- * @author suxuexia
- * @since 2024-03-12 10:13:26
+ * @author makejava
+ * @since 2024-03-12 10:11:31
  */
 public class Adminuser {
-
     /**
      * 管理员ID
      */

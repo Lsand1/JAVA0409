@@ -11,57 +11,10 @@
         <result property="addtime" column="addtime" jdbcType="TIMESTAMP"/>
         <association property="users" column="user_id" select="com.test.dao.UsersDao.queryById">
         </association>
-<!--        <association property="users" javaType="com.test.entity.Users">-->
-<!--            <result property="id" column="id" jdbcType="INTEGER"/>-->
-<!--            <result property="loginName" column="login_name" jdbcType="VARCHAR"/>-->
-<!--            <result property="realName" column="real_name" jdbcType="VARCHAR"/>-->
-<!--            <result property="password" column="password" jdbcType="VARCHAR"/>-->
-<!--            <result property="gender" column="gender" jdbcType="VARCHAR"/>-->
-<!--            <result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>-->
-<!--            <result property="city" column="city" jdbcType="VARCHAR"/>-->
-<!--            <result property="email" column="email" jdbcType="VARCHAR"/>-->
-<!--            <result property="credit" column="credit" jdbcType="INTEGER"/>-->
-<!--            <result property="regtime" column="regtime" jdbcType="TIMESTAMP"/>-->
-<!--        </association>-->
-
         <collection property="ordersItemList" column="id" select="com.test.dao.OrdersItemDao.queryByoId">
 
         </collection>
     </resultMap>
-
-    <!--查询指定行数据-->
-    <select id="queryAll" resultMap="OrdersMap">
-        select
-        id, user_id, code, status, amount, addtime
-        from orders
---         select
---         orders.id, user_id, code, status, amount, addtime, login_name,real_name
---         from orders
---         inner join users
---         ON users.id = user_id
-        <where>
-            <if test="userId != null">
-                and user_id = #{userId}
-            </if>
-            <if test="status != null">
-                and status = #{status}
-            </if>
-        </where>
-    </select>
-
-    <!--通过主键删除-->
-    <delete id="deleteById">
-        delete
-        from orders
-        <where>
-            <if test="id!=null">
-               and id = #{id}
-            </if>
-            <if test="userId!=null">
-                and  user_id = #{userId}
-            </if>
-        </where>
-    </delete>
 
     <!--查询单个-->
     <select id="queryById" resultMap="OrdersMap">
@@ -74,5 +27,57 @@
         from orders
         where id = #{id}
     </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="OrdersMap">
+        select
+        id, user_id, code, status, amount, addtime
+        from orders
+        <where>
+<!--            <if test="userId != null">-->
+<!--                and user_id = #{userId}-->
+<!--            </if>-->
+            <if test="code != null and code != ''">
+                and code like concat('%', #{code},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into orders(user_id, code, status, amount, addtime)
+        values (#{userId}, #{code}, #{status}, #{amount}, #{addtime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update orders
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="amount != null">
+                amount = #{amount},
+            </if>
+            <if test="addtime != null">
+                addtime = #{addtime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from orders
+        where id = #{id}
+    </delete>
+
 </mapper>
 

@@ -4,32 +4,22 @@ import com.github.pagehelper.PageInfo;
 import com.test.entity.Users;
 import com.test.service.UsersService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
-/**
- * (Users)表控制层
- *
- * @author suxuexia
- * @since 2024-05-07 10:07:14
- */
-@Tag(name="UsersController",description="这是会员的控制层")
+@Tag(name="UsersController",description = "会员的增删改查")
 @RestController
 @RequestMapping("users")
 public class UsersController {
-    /**
-     * 服务对象
-     */
     @Resource
     private UsersService usersService;
 
     @Operation(summary="根据条件查询会员")
     @RequestMapping(value = "getUserList", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity<PageInfo<Users>> queryByPage( @RequestBody Users users, Integer pageNum, Integer pageSize ) {
-        return ResponseEntity.ok(this.usersService.queryAllByPage(users, pageNum,pageSize));
+        return ResponseEntity.ok(this.usersService.queryByPage(users, pageNum,pageSize));
     }
 
     /**
@@ -39,7 +29,7 @@ public class UsersController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public ResponseEntity<Users> queryById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Users> queryById(@Parameter(description = "输入id查询") @PathVariable("id") Integer id) {
         return ResponseEntity.ok(this.usersService.queryById(id));
     }
 

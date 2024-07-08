@@ -1,46 +1,66 @@
 package com.test.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Response<T> implements Serializable {
 
-    private boolean success = true;
-    private String message;
-    private T data;
+    @Serial
+    private static final long serialVersionUID = 1L; // 序列化版本ID
 
+    private boolean success; // 响应成功标志
+    private String message;  // 响应消息
+    private T data;         // 响应数据
 
-    public static <T> Response<T> fail() {
-        Response<T> response = new Response<>();
+    // 私有构造函数，使用静态方法创建实例
+    public Response(boolean b, String passwordChangeFailed, Object o) {
+        // 留空，允许通过setter方法设置属性
+    }
+
+    public Response(boolean b, String insertFailed, int i) {
+    }
+
+    // 静态工厂方法，创建失败响应
+    public static <U> Response<U> fail() {
+        Response<U> response = new Response<>(false, "Password change failed", null);
         response.setSuccess(false);
         return response;
     }
 
-    public static <T> Response<T> fail(String msg) {
-        Response<T> response = new Response<>();
+    // 静态工厂方法，创建带有消息的失败响应
+    public static <U> Response<U> fail(String msg) {
+        Response<U> response = new Response<>(false, "Password change failed", null);
         response.setSuccess(false);
         response.setMessage(msg);
         return response;
     }
 
-    public static <T> Response<T> success(T data) {
-        Response<T> response = new Response<>();
+    // 静态工厂方法，创建成功的响应
+    public static <U> Response<U> success(U data) {
+        Response<U> response = new Response<>(false, "Password change failed", null);
+        response.setSuccess(true);
         response.setData(data);
         return response;
     }
 
-    public static <T> Response<T> success(String msg) {
-        Response<T> response = new Response<>();
+    // 静态工厂方法，创建只有消息的成功响应
+    public static <U> Response<U> success(String msg) {
+        Response<U> response = new Response<>(false, "Password change failed", null);
+        response.setSuccess(true);
         response.setMessage(msg);
         return response;
     }
 
-    public static <T> Response<T> success(String msg,T data) {
-        Response<T> response = new Response<>();
+    // 静态工厂方法，创建带有消息和数据的成功响应
+    public static <U> Response<U> success(String msg, U data) {
+        Response<U> response = new Response<>(false, "Password change failed", null);
+        response.setSuccess(true);
+        response.setMessage(msg);
         response.setData(data);
-        response.setMessage(msg);
         return response;
     }
 
+    // Getter和Setter方法
     public boolean isSuccess() {
         return success;
     }
@@ -64,5 +84,4 @@ public class Response<T> implements Serializable {
     public void setData(T data) {
         this.data = data;
     }
-
 }

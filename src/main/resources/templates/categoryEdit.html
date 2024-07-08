@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品类别编辑</title>
+    <link th:href="@{/local/css/categoryAdd.css}" rel="stylesheet">
+</head>
+<body>
+<div>
+    <div id="top" th:include="head.html"></div>
+    <div id="middle">
+
+        <div id="left" th:include="left.html::left"></div>
+        <div id="right">
+            <div id="msg" th:text="${msg}"></div>
+            <form id="editGoods" action="/admin/category/editCategory" method="post">
+                <input type="hidden" name="id" th:value="${category.getId()}">
+                <table id="addTable">
+                    <tr><th>名称</th><td><input type="text" name="name" th:value="${category.getName()}"></td></tr>
+                    <tr>
+                        <td colspan="2">
+                            <input id ="btngoBack" type="button" value="返回">
+                            <input type="reset" value="重置">
+                            <input type="submit" value="提交">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div id="bottom" th:include="bottom.html::bottom"></div>
+    <script th:src="@{/js/axios.min.js}"></script>
+    <script th:src="@{/js/jquery-3.4.1.slim.min.js}"></script>
+    <script th:src="@{/local/js/commom.js}"></script>
+</div>
+</body>
+</html>

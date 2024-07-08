@@ -1,20 +1,20 @@
-function delCategory(obj, cId) {
-    let $this = $(obj)
 
+function delCategory(obj,cId) {
+    let $this=$(obj)
     $.ajax({
-        url: "/admin/category/delCategory/" + cId
-        , type: "get"
-        , success: function (res) {
-            if (res > 0) {
+        url:"/admin/category/delCategory/"+cId
+        ,type:"get"
+        ,success:function (res){
+            if(res){
                 $this.parent().parent().remove();
                 $("#msg").html("删除成功")
-            } else {
+            }else {
                 $("#msg").html("删除失败")
             }
         }
     })
-}
 
+}
 function goEditCategory(obj) {
     let $this = $(obj);
     let span = $this.parent().prev().children("span");
@@ -35,6 +35,7 @@ function editCategory(obj, gId) {
         , data: JSON.stringify({"id": gId, "name": $this.val()})
         , success: function (res) {
             console.log(res)
+
             if (res > 0) {
                 $this.hide()
                 $this.prev().html($this.val()).show();

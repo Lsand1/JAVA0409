@@ -1,12 +1,15 @@
 package com.test.entity;
 
+import java.io.Serializable;
+
 /**
  * (OrdersItem)实体类
  *
- * @author suxuexia
- * @since 2024-03-26 10:59:35
+ * @author makejava
+ * @since 2024-05-14 10:46:17
  */
 public class OrdersItem {
+
     /**
      * 详情ID
      */
@@ -23,9 +26,26 @@ public class OrdersItem {
      * 数量
      */
     private Integer num;
-
     private Orders orders;
     private Goods goods;
+
+    public Orders getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Orders orders) {
+        this.orders = orders;
+    }
+
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+    }
+
+
 
     public Integer getId() {
         return id;
@@ -59,20 +79,5 @@ public class OrdersItem {
         this.num = num;
     }
 
-    public Orders getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Orders orders) {
-        this.orders = orders;
-    }
-
-    public Goods getGoods() {
-        return goods;
-    }
-
-    public void setGoods(Goods goods) {
-        this.goods = goods;
-    }
 }
 

@@ -9,10 +9,77 @@
         <result property="num" column="num" jdbcType="INTEGER"/>
         <association property="orders" column="order_id" select="com.test.dao.OrdersDao.queryById">
         </association>
-        <association property="goods" column="goods_id" javaType="com.test.entity.Goods"
-                     select="com.test.dao.GoodsDao.queryById">
+        <association property="goods" javaType="com.test.entity.Goods">
+            <id property="id" column="id"></id>
+            <result property="name" column="name"></result>
         </association>
     </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="OrdersItemMap">
+        select id,
+               order_id,
+               goods_id,
+               num
+        from orders_item
+        where id = #{id}
+    </select>
+
+    <select id="queryByoId" resultMap="OrdersItemMap">
+        select
+        orders_item.id, order_id, goods_id, num,goods.name
+        from orders_item
+        inner join goods
+        on goods_id = goods.id
+        where order_id = #{orderId}
+
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="OrdersItemMap">
+        select
+        orders_item.id, order_id, goods_id, num,goods.name
+        from orders_item
+        inner join goods
+        on goods_id = goods.id
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="orderId != null">
+                and order_id = #{orderId}
+            </if>
+            <if test="goodsId != null">
+                and goods_id = #{goodsId}
+            </if>
+            <if test="num != null">
+                and num = #{num}
+            </if>
+        </where>
+    </select>
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into orders_item(order_id, goods_id, num)
+        values (#{orderId}, #{goodsId}, #{num})
+    </insert>
+
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update orders_item
+        <set>
+            <if test="orderId != null">
+                order_id = #{orderId},
+            </if>
+            <if test="goodsId != null">
+                goods_id = #{goodsId},
+            </if>
+            <if test="num != null">
+                num = #{num},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
     <!--通过订单ID删除订单详请-->
     <delete id="delOrdersItemByoId">
@@ -20,38 +87,15 @@
         from orders_item
         where order_id = #{orderId}
     </delete>
-
-    <!--查询指定行数据-->
-    <select id="queryAll" resultMap="OrdersItemMap">
-        select id,
-               order_id,
-               goods_id,
-               num
-        from orders_item
-    </select>
-
-    <!--根据订单ID查询-->
-    <select id="queryByoId" resultMap="OrdersItemMap">
-        select id,
-               order_id,
-               goods_id,
-               num
-        from orders_item
-        where order_id = #{orderId}
-
-    </select>
-
-
     <delete id="deleteByUserId">
-        DELETE
-        FROM orders_item
+        DELETE FROM orders_item
         WHERE order_id IN (
-            SELECT orders.id
-            FROM orders
-                     INNER JOIN users
-                                ON orders.user_id = users.id
+            SELECT orders.id FROM orders
+                                      INNER JOIN users
+                                                 ON orders.user_id = users.id
             WHERE users.id = #{userId}
         )
     </delete>
+
 </mapper>
 

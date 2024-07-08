@@ -8,21 +8,19 @@ import java.io.Serializable;
 /**
  * (Users)实体类
  *
- * @author suxuexia
- * @since 2024-05-07 10:07:15
+ * @author makejava
+ * @since 2024-05-07 10:43:51
  */
-@Schema(description = "会员")
-public class Users implements Serializable {
-    private static final long serialVersionUID = 939753003031575883L;
+@Schema(description = "会员信息")
+public class Users  {
     /**
      * 用户ID
      */
-    @Schema(description = "用户ID")
+    @Schema(description = "用户id")
     private Integer id;
     /**
      * 登录名
      */
-    @Schema(description = "登录名")
     private String loginName;
     /**
      * 姓名

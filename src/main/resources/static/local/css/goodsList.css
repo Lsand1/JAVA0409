@@ -1,10 +1,156 @@
-.listimg{
-    width: 30px;
-    height: 30px;
+/* 重置浏览器默认样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-#right>table{
-    width: 76vw;
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
 }
-.width150{
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* 导航栏样式 */
+nav {
+    background: #555;
+    color: #fff;
+    padding: 15px 0;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* 商品列表表格样式 */
+.table-wrapper {
+    margin-top: 20px;
+}
+
+.table-title {
+    background: #3498db;
+    color: white;
+    padding: 10px;
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+
+商品列表 {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+商品列表 th,
+商品列表 td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+商品列表 th {
+    background-color: #2980b9;
+    color: white;
+}
+
+商品列表 tr:hover {
+    background-color: #f5f5f5;
+}
+
+商品列表 .listimg {
+    max-width: 50px;
+    height: auto;
+}
+
+/* 分页组件样式 */
+.pagination {
+    display: inline-block;
+    padding: 10px;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+/* 按钮和链接样式 */
+.button,
+a.button-link {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover,
+a.button-link:hover {
+    background-color: #2980b9;
+}
+
+/* 辅助类 */
+.width150 {
     width: 150px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    header h1 {
+        font-size: 1.2em;
+    }
+
+    nav ul li {
+        display: block;
+        margin-bottom: 5px;
+    }
 }

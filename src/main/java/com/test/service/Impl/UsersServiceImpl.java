@@ -2,7 +2,6 @@ package com.test.service.Impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.test.entity.Goods;
 import com.test.entity.Users;
 import com.test.dao.UsersDao;
 import com.test.service.UsersService;
@@ -34,7 +33,12 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public PageInfo<Users> queryAllByPage(Users users,Integer pageNum, Integer pageSize){
+    public PageInfo<Users> queryByPage(Users users, Integer pageNum, Integer pageSize) {
+        return null;
+    }
+
+    @Override
+    public PageInfo<Users> queryAllByPage(Users users, Integer pageNum, Integer pageSize){
         PageHelper.startPage(pageNum, pageSize);
         List<Users> usersList = usersDao.queryAll(users);
         PageInfo<Users> pageInfo = new PageInfo<>(usersList);

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品类别添加</title>
+    <link th:href="@{/local/css/categoryAdd.css}" rel="stylesheet">
+</head>
+<body>
+<div id="top" th:include="head.html"></div>
+<div id="middle">
+    <div id="left" th:include="left.html::left"></div>
+    <div id="right">
+        <form id="addGoods" action="/admin/category/addCategory" method="post">
+
+            <table id="addTable">
+                <tr><th>名称</th><td><input type="text" name="name"></td></tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="reset" value="重置">
+                        <input type="submit" value="提交">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<div id="bottom" th:include="bottom.html::bottom"></div>
+
+<script th:src="@{/js/axios.min.js}"></script>
+
+</body>
+</html>

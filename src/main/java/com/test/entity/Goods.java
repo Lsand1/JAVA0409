@@ -6,11 +6,10 @@ import java.io.Serializable;
 /**
  * (Goods)实体类
  *
- * @author suxuexia
- * @since 2024-03-26 10:20:48
+ * @author makejava
+ * @since 2024-03-26 10:56:30
  */
-public class Goods implements Serializable  {
-
+public class Goods implements Serializable {
     /**
      * 商品ID
      */
@@ -26,7 +25,7 @@ public class Goods implements Serializable  {
     /**
      * 商品名
      */
-    public String name;
+    private String name;
     /**
      * 商品价格
      */
@@ -52,8 +51,6 @@ public class Goods implements Serializable  {
      */
     private String image;
 
-    private Category category;
-
     public Category getCategory() {
         return category;
     }
@@ -61,6 +58,9 @@ public class Goods implements Serializable  {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+    private Category category;
+
 
     public Integer getId() {
         return id;

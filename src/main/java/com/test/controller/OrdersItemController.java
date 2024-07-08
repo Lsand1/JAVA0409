@@ -5,17 +5,15 @@ import com.test.service.OrdersItemService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * (OrdersItem)表控制层
  *
- * @author suxuexia
- * @since 2024-03-26 10:59:35
+ * @author makejava
+ * @since 2024-05-14 10:46:17
  */
 @Controller
 @RequestMapping("/admin/ordersItem")
@@ -25,14 +23,13 @@ public class OrdersItemController {
      */
     @Resource
     private OrdersItemService ordersItemService;
-
     @GetMapping("getOrdersItemList/{id}")
-    public String getOrdersItemList(@PathVariable("id") Integer orderId, Model model) {
-        OrdersItem ordersItem = new OrdersItem();
+    public String getOrdersItemList(@PathVariable("id") Integer orderId, Model model){
+        OrdersItem ordersItem= new OrdersItem();
         ordersItem.setOrderId(orderId);
-        List<OrdersItem> ordersItemList = this.ordersItemService.queryAll(ordersItem);
-        model.addAttribute("ordersItemList", ordersItemList);
-        return "ordersItemList";
+        List<OrdersItem> ordersItemList=this.ordersItemService.queryByPage(ordersItem);
+        model.addAttribute("ordersItemList",ordersItemList);
+        return "ordersltemList";
     }
 }
 

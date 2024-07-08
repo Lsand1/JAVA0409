@@ -7,12 +7,14 @@ import java.util.List;
 
 public interface CategoryService {
     List<Category> queryAllCategory();
+   PageInfo<Category> queryAllByPage(Integer pageNum, Integer pageSize);
 
-    PageInfo<Category> queryAllByPage(Integer pageNum, Integer pageSize);
+   // Category queryById(Integer id);
 
+    //boolean deleteById(int cID);
     int deleteById(Integer id);
 
-    int update(Category category);
+    int insert(String  name);
 
-    int insert(String name);
+    int update(Category category);
 }
